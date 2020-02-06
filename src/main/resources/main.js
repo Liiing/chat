@@ -1,13 +1,12 @@
 let connection = new WebSocket('ws://localhost:4444');
 let textBox = document.getElementById("textBox");
 let chatBox = document.getElementById("chatBox");
+let userName = document.getElementById("userName").value;
+let password = document.getElementById("password").value;
+
 
 connection.onopen = function () {
     log('Websocket open!');
-
-    let userName = document.getElementById("userName").value;
-    let password = document.getElementById("password").value;
-
 
     //sende ein hallo nach dem verbinden
     //connection.send("Hallo")
@@ -24,20 +23,28 @@ connection.onmessage = function (messageEvent) {
     sendToChatBox(messageAsString);
 };
 
-function log(s) {
-    console.log(s);
-}
 
 function sendToChatBox(message) {
     chatBox.innerHTML = chatBox.innerHTML + message;
 }
 
-function sendButtonClick() {
+function messageButtonClick() {
     let message = textBox.value;
 
-    send(message);
+    send('message=' + message);
+}
+
+function loginButtonClick() {
+    let userName = document.getElementById("userName").value;
+    let password = document.getElementById("password").value;
+
+    send('login=' + userName + ';' + password);
 }
 
 function send(text) {
-    connection.send(JSON.stringify(text));
+    connection.send(text);
+}
+
+function log(s) {
+    console.log(s);
 }

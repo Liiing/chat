@@ -12,38 +12,56 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
     private static int TCP_PORT = 4444;
 
-    private List<WebSocket> userConnections;
-    private List<User> allUsers;
+    private List<WebSocket> visiterConnections;
+    private List<User> registeredUsers;
+    private List<User> allOnlineUsers;
     private Gson gson;
 
     public WebSocketServer() {
         super(new InetSocketAddress(TCP_PORT));
-        userConnections = new ArrayList<>();
+        allOnlineUsers = new ArrayList<>();
+        visiterConnections = new ArrayList<>();
+        registeredUsers = new ArrayList<>();
+
+        registeredUsers.add(new User("t","t"));
         gson = new Gson();
     }
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        userConnections.add(conn);
+        visiterConnections.add(conn);
         log("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
        // conn.send("Hi");
     }
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        userConnections.remove(conn);
+        visiterConnections.remove(conn);
         log("Closed connection to " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
     @Override
     public void onMessage(WebSocket conn, String text) {
-        for (WebSocket userConnection : userConnections) {
-            userConnection.send(text);
-        }
-
-        gson.toJson(new Object());
-
         log(text);
+        String[] prefixSplitted = text.split("=");
+        String command = prefixSplitted[0];
+        if(command.equals("login")) {
+            String[] userNameAndPasswordSplitted = prefixSplitted[1].split(";");
+            String username = userNameAndPasswordSplitted[0];
+            String password = userNameAndPasswordSplitted[1];
+
+            for (User registeredUser : registeredUsers) {
+                if(registeredUser.getUserName().equals(username) && registeredUser.getPassword().equals(password)){
+                    allOnlineUsers.add(new User(username, password, conn));
+                    log(username + password + conn.getRemoteSocketAddress().getAddress().getHostName());
+
+                }
+            }
+        } else {
+            for (WebSocket userConnection : visiterConnections) {
+                userConnection.send(text);
+            }
+        }
     }
 
     @Override
