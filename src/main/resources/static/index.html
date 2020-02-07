@@ -5,12 +5,28 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <div id="userMask">
+    <div id="loginMask">
         <input type="text" id="username" name="username" placeholder="Username">
-        <input type="text" id="password" name="password" placeholder="Password">
+        <input type="password" id="password" name="password" placeholder="Password">
         <button id="loginButton" onclick="loginButtonClick()">Login</button>
-        <button onclick="registerButtonClick()">Register</button>
+        <button id="gotToRegisterButton" onclick="showRegisterElements()">Register</button>
     </div>
+
+    <dir hidden id="registerMask">
+        <input type="text" id="newUsername" name="newUsername" placeholder="Username" onkeydown="checkNewUsername()">
+        <p id="passwordInformation"></p>
+        <ul id="passwordRequirements" title="Password must contain:">
+            <li id="passwordLowercase"> A lowercase letter</li>
+            <li id="passwordCapital"> A capital letter</li>
+            <li id="passwordNumber"> A number</li>
+            <li id="passwordSymbol"> A symbol</li>
+            <li id="passwordLength"> Minimum 8 characters</li>
+        </ul>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Password" onkeydown="checkNewUserPasswordStrength()">
+        <p id="passwordsNotSame"></p>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" onkeydown="compareNewUserPasswords()">
+        <button id="registerButton" onclick="registerButtonClick()">Register</button>
+    </dir>
 
     <div id="chat" hidden="true">
         <p>Chat</p>
