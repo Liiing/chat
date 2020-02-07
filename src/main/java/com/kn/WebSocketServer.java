@@ -1,3 +1,4 @@
+package com.kn;
 
 import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
@@ -6,6 +7,7 @@ import org.java_websocket.handshake.ClientHandshake;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
@@ -15,6 +17,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     private List<WebSocket> visiterConnections;
     private List<User> registeredUsers;
     private List<User> allOnlineUsers;
+    private Map<String,Session> sessionMap;
     private Gson gson;
 
     public WebSocketServer() {
@@ -51,8 +54,8 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
             String password = userNameAndPasswordSplitted[1];
 
             for (User registeredUser : registeredUsers) {
-                if(registeredUser.getUserName().equals(username) && registeredUser.getPassword().equals(password)){
-                    allOnlineUsers.add(new User(username, password, conn));
+                if(registeredUser.getUsername().equals(username) && registeredUser.getPassword().equals(password)){
+
                     log(username + password + conn.getRemoteSocketAddress().getAddress().getHostName());
 
                 }

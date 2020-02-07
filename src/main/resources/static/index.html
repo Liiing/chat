@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+    <div id="userMask">
+        <input type="text" id="username" name="username" placeholder="Username">
+        <input type="text" id="password" name="password" placeholder="Password">
+        <button id="loginButton" onclick="loginButtonClick()">Login</button>
+        <button onclick="registerButtonClick()">Register</button>
+    </div>
+
+    <div id="chat" hidden="true">
+        <p>Chat</p>
+        <textarea id="chatBox"></textarea>
+        <input type="text" id="textBox" name="name" placeholder="...">
+        <button onclick="messageButtonClick()">Send</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

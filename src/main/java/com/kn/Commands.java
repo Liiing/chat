@@ -1,4 +1,4 @@
+package com.kn;
+
 public enum Commands {
-    LOGIN,
-    MESSAGE
 }
