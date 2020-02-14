@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
@@ -34,6 +35,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         visiterConnections.add(conn);
         log("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
+
        // conn.send("Hi");
     }
 
@@ -55,9 +57,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
             for (User registeredUser : registeredUsers) {
                 if(registeredUser.getUsername().equals(username) && registeredUser.getPassword().equals(password)){
-
                     log(username + password + conn.getRemoteSocketAddress().getAddress().getHostName());
-
                 }
             }
         } else {

@@ -12,4 +12,9 @@ public class Session {
         this.user = user;
         this.token = token;
     }
+
+    public Session(WebSocket webSocket, String token) {
+        this.webSocket = webSocket;
+        this.token = token;
+    }
 }

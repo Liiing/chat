@@ -9,32 +9,9 @@
         <input type="text" id="username" name="username" placeholder="Username">
         <input type="password" id="password" name="password" placeholder="Password">
         <button id="loginButton" onclick="loginButtonClick()">Login</button>
-        <button id="gotToRegisterButton" onclick="showRegisterElements()">Register</button>
+        <a href="register/index.html"><button id="gotToRegisterButton">Register</button></a>
     </div>
 
-    <dir hidden id="registerMask">
-        <input type="text" id="newUsername" name="newUsername" placeholder="Username" onkeydown="checkNewUsername()">
-        <p id="passwordInformation"></p>
-        <ul id="passwordRequirements" title="Password must contain:">
-            <li id="passwordLowercase"> A lowercase letter</li>
-            <li id="passwordCapital"> A capital letter</li>
-            <li id="passwordNumber"> A number</li>
-            <li id="passwordSymbol"> A symbol</li>
-            <li id="passwordLength"> Minimum 8 characters</li>
-        </ul>
-        <input type="password" id="newPassword" name="newPassword" placeholder="Password" onkeydown="checkNewUserPasswordStrength()">
-        <p id="passwordsNotSame"></p>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" onkeydown="compareNewUserPasswords()">
-        <button id="registerButton" onclick="registerButtonClick()">Register</button>
-    </dir>
-
-    <div id="chat" hidden="true">
-        <p>Chat</p>
-        <textarea id="chatBox"></textarea>
-        <input type="text" id="textBox" name="name" placeholder="...">
-        <button onclick="messageButtonClick()">Send</button>
-    </div>
-
-    <script src="main.js"></script>
+    <script src="global.js"></script>
 </body>
 </html>
