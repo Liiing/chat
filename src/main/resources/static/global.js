@@ -1,4 +1,5 @@
 let connection = new WebSocket('ws://localhost:4444');
+let inactivityTimer;
 
 connection.onopen = function () {
     log('Websocket open!');
@@ -40,4 +41,12 @@ function send(text) {
 
 function log(s) {
     console.log(s);
+}
+
+function startTimoutWaitingForInactivity(fun) {
+    if(inactivityTimer) {
+        clearTimeout(inactivityTimer);
+    }
+
+    inactivityTimer = setTimeout(fun, 1000);
 }

@@ -22,7 +22,6 @@ public class RestController {
 		if(DatabaseService.doesUsernameAlreadyExist(username)){
 			userExists = true;
 		}
-
 		return userExists;
 	}
 }
