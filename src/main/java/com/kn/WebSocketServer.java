@@ -1,10 +1,12 @@
 package com.kn;
 
 import com.google.gson.Gson;
+import com.kn.model.Message;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 
 import java.net.InetSocketAddress;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +18,19 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     private static int TCP_PORT = 4444;
 
     private List<WebSocket> visiterConnections;
-    private List<User> registeredUsers;
     private List<User> allOnlineUsers;
-    private Map<String,Session> sessionMap;
+    private static Map<UUID, Session> sessionMap;
     private Gson gson;
+
+    public static void addSession(UUID token, Session session) {
+        sessionMap.put(token, session);
+    }
 
     public WebSocketServer() {
         super(new InetSocketAddress(TCP_PORT));
         allOnlineUsers = new ArrayList<>();
         visiterConnections = new ArrayList<>();
-        registeredUsers = new ArrayList<>();
 
-        registeredUsers.add(new User("t","t"));
         gson = new Gson();
     }
 
@@ -36,7 +39,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
         visiterConnections.add(conn);
         log("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
 
-       // conn.send("Hi");
+        // conn.send("Hi");
     }
 
     @Override
@@ -46,24 +49,12 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     @Override
-    public void onMessage(WebSocket conn, String text) {
-        log(text);
-        String[] prefixSplitted = text.split("=");
-        String command = prefixSplitted[0];
-        if(command.equals("login")) {
-            String[] userNameAndPasswordSplitted = prefixSplitted[1].split(";");
-            String username = userNameAndPasswordSplitted[0];
-            String password = userNameAndPasswordSplitted[1];
+    public void onMessage(WebSocket conn, String json) {
+        Message message = gson.fromJson(json, Message.class);
+        message.setServerReceivedTime(Instant.now());
 
-            for (User registeredUser : registeredUsers) {
-                if(registeredUser.getUsername().equals(username) && registeredUser.getPassword().equals(password)){
-                    log(username + password + conn.getRemoteSocketAddress().getAddress().getHostName());
-                }
-            }
-        } else {
-            for (WebSocket userConnection : visiterConnections) {
-                userConnection.send(text);
-            }
+        for (WebSocket userConnection : visiterConnections) {
+            userConnection.send(gson.toJson(message));
         }
     }
 

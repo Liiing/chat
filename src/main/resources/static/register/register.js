@@ -31,8 +31,7 @@ function checkNewUsername() {
             if (userExists) {
                 usernameAlreadyExists.innerHTML = "Taken";
                 validNewUsername = false;
-            } 
-            else {
+            } else {
                 usernameAlreadyExists.innerHTML = "Available";
                 validNewUsername = true;
             }
@@ -79,14 +78,12 @@ function checkNewUserPasswordStrength() {
 
     if (strength == 4){
         strongPassword = true;
-    }
-    else {
+    }else {
         strongPassword = false;
     }
 }
 
 function compareNewUserPasswords() {
-
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirmPassword").value;
     let passwordsNotSame = document.getElementById('passwordsNotSame');
@@ -94,18 +91,13 @@ function compareNewUserPasswords() {
     if (password === confirmPassword) {
         passwordsNotSame.innerHTML = "Same";
         newUserPasswordsCorrect = true;
-    } 
-    else {
+    } else {
         passwordsNotSame.innerHTML = "Passwords don't match";
         newUserPasswordsCorrect = false;
     }
 }
 
 function registerButtonClick() {
-    checkNewUsername();
-    checkNewUserPasswordStrength();
-    compareNewUserPasswords();
-    
     if (isRegisterInputValid) {
         let username = document.getElementById("newUsername");
         let password = document.getElementById("password");
@@ -131,9 +123,13 @@ function registerUser(user) {
       body: JSON.stringify(user),
     }).then((response) => {
         return response.json();
-    }).then((json) => {
-        log(json);
-        return json;
+    }).then((registerSuccessful) => {
+
+        if(registerSuccessful) {
+            window.location.href = "user-added.html";
+        } else {
+            window.location.href = "registration-failed.html";
+        }
     });
 }
 

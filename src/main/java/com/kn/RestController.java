@@ -1,27 +1,41 @@
 package com.kn;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletResponse;
+
+import java.util.UUID;
 
 @Controller
 public class RestController {
 
-	@ResponseBody
-	@PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
-	public User register(@RequestBody User user, HttpServletResponse response) {
-		DatabaseService.registerUser(user);
-		return user;
-	}
+    public static boolean doesUsernameAlreadyExist(String username) {
+        User user = DatabaseService.getUserByUsername(username);
 
-	@ResponseBody
-	@PostMapping(path = "/userExists", consumes = "application/json", produces = "application/json")
-	public Boolean userExists(@RequestBody String username, HttpServletResponse response){
-		boolean userExists = false;
+        return user != null;
+    }
 
-		if(DatabaseService.doesUsernameAlreadyExist(username)){
-			userExists = true;
-		}
-		return userExists;
-	}
+    public static boolean isPasswordCorrect(String username, String password) {
+        User user = DatabaseService.getUserByUsername(username);
+
+        return password.equals(user.getPassword());
+    }
+
+    public boolean register(User user) {
+        if (!doesUsernameAlreadyExist(user.getUsername())) {
+            return DatabaseService.addUser(user);
+        }
+        return false;
+    }
+
+    public boolean login(User user) {
+        User userFromDatabase = DatabaseService.getUser(user);
+
+        if (userFromDatabase != null) {
+            if(isPasswordCorrect(userFromDatabase.getUsername(), user.getPassword())) {
+                UUID token = UUID.randomUUID();
+                WebSocketServer.addSession(token, new Session(null, user, token));
+                return true;
+            }
+        }
+        return false;
+    }
 }
