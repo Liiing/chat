@@ -7,13 +7,13 @@ import java.util.UUID;
 @Controller
 public class RestController {
 
-    public static boolean doesUsernameAlreadyExist(String username) {
+    public boolean doesUsernameAlreadyExist(java.lang.String username) {
         User user = DatabaseService.getUserByUsername(username);
 
         return user != null;
     }
 
-    public static boolean isPasswordCorrect(String username, String password) {
+    public boolean isPasswordCorrect(java.lang.String username, java.lang.String password) {
         User user = DatabaseService.getUserByUsername(username);
 
         return password.equals(user.getPassword());
@@ -26,16 +26,17 @@ public class RestController {
         return false;
     }
 
-    public boolean login(User user) {
+    public Session login(User user) {
         User userFromDatabase = DatabaseService.getUser(user);
 
         if (userFromDatabase != null) {
             if(isPasswordCorrect(userFromDatabase.getUsername(), user.getPassword())) {
                 UUID token = UUID.randomUUID();
-                WebSocketServer.addSession(token, new Session(null, user, token));
-                return true;
+                Session session = new Session(null, user.getUsername(), token);
+                WebSocketServer.getInstance().addSession(token, session);
+                return session;
             }
         }
-        return false;
+        return null;
     }
 }

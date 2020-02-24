@@ -1,12 +1,11 @@
 package com.kn;
 
-import java.util.Optional;
 
 public class User {
-    private String username;
-    private String password;
+    private java.lang.String username;
+    private java.lang.String password;
 
-    public User(String username, String password){
+    public User(String username,String password){
         this.username = username;
         this.password = password;
     }

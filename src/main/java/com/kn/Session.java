@@ -6,12 +6,12 @@ import java.util.UUID;
 
 public class Session {
     private WebSocket webSocket;
-    private User user;
+    private String username;
     private UUID token;
 
-    public Session(WebSocket webSocket, User user, UUID token) {
+    public Session(WebSocket webSocket, String username, UUID token) {
         this.webSocket = webSocket;
-        this.user = user;
+        this.username = username;
         this.token = token;
     }
 

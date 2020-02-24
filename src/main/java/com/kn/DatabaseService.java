@@ -10,7 +10,7 @@ public class DatabaseService {
         return registeredUsers.add(user);
     }
 
-    public static User getUserByUsername(String username) {
+    public static User getUserByUsername(java.lang.String username) {
         for (User registeredUser : registeredUsers) {
             if (registeredUser.getUsername().equals(username)) {
                 return registeredUser;

@@ -36,7 +36,6 @@ function checkNewUsername() {
                 validNewUsername = true;
             }
 
-            enableRegisterButtonIfAllInputsAreValid();
             return userExists;
         });
 }
