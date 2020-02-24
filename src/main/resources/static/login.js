@@ -8,7 +8,7 @@ function loginUser() {
 	username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    let jsonObject = {"key":"value"};
+    let jsonObject = {};
 
     jsonObject.username = username;
     jsonObject.password = password; 
@@ -29,6 +29,7 @@ function loginUser() {
 
         	username = session.username;
             send(message);
+
         } else {
         	document.getElementById("incorrectLoginDataMessage").innerHTML = "Incorrect login data";
         }

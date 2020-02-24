@@ -8,6 +8,8 @@ connection.onopen = function () {
 connection.onmessage = function (response) {
     let message = JSON.parse(response.data);
     if (message.command === "Login successful") {
+        hideChat(false);
+        hideLogin(true);
         showInfoBox("Login successful")
     } else {
         sendToChatBox(message.sender, message.content);
@@ -36,6 +38,18 @@ function showInfoBox(info) {
 
 function fadeout(element) {
     element.style.opacity = "0";
+}
+
+function hideChat(boolean) {
+    let chat = document.getElementById("chat");
+
+    chat.hidden=boolean;
+}
+
+function hideLogin(boolean) {
+    let login = document.getElementById("login")
+
+    login.hidden=boolean;
 }
 
 function startTimoutWaitingForInactivity(fun) {

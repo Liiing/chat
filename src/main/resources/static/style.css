@@ -1,6 +1,46 @@
-#fadeout {
+.loginElement {
+    margin: 5px;
+}
+
+#infoBox {
     opacity: 1;
     transition: 1s opacity;
     text-align: center;
     font-size:16px;
 }
+
+#username {
+    display: block;
+}
+
+#password {
+    display: block;
+}
+
+#loginButton {
+    alignment: right;
+}
+
+#registerButton {
+    alignment: right;
+}
+
+#chatBox {
+    display: block;
+
+}
+
+#chatBox {
+    display: block;
+    width: 400px;
+    height: 200px;
+}
+
+#textBox {
+    width: 350px;
+}
+
+.chatElement {
+    margin: 5px;
+}
+
