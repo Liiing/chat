@@ -31,7 +31,7 @@ public class RestController {
 
         if (userFromDatabase != null) {
             if(isPasswordCorrect(userFromDatabase.getUsername(), user.getPassword())) {
-                UUID token = UUID.randomUUID();
+                String token = UUID.randomUUID().toString();
                 Session session = new Session(null, user.getUsername(), token);
                 WebSocketServer.getInstance().addSession(token, session);
                 return session;

@@ -2,13 +2,24 @@ let newUserPasswordsCorrect;
 let validNewUsername;
 let strongPassword;
 
-window.onload = function () {
+let newUsernameTextBox = document.getElementById('newUsername');
+let newPasswordTextBox = document.getElementById('password');
+let confirmPasswordTextBox = document.getElementById('confirmPassword');
+let registerButton = document.getElementById('registerButton');
+
+newUsernameTextBox.addEventListener('keyup', function() { startTimoutWaitingForInactivity(checkNewUsername) });
+//newUsernameTextBox.addEventListener('keyup', checkNewUsername);
+newPasswordTextBox.addEventListener('keyup', () => {checkNewUserPasswordStrength(); compareNewUserPasswords(); } );
+confirmPasswordTextBox.addEventListener('keyup', compareNewUserPasswords);
+registerButton.addEventListener('click', registerButtonClick);
+
+window.addEventListener('load', () => {
     let listOfElementsWithRegistrationInputs = document.querySelectorAll('#newUsername, #password, #confirmPassword');
 
     listOfElementsWithRegistrationInputs.forEach(element => 
             element.addEventListener('keyup', enableRegisterButtonIfAllInputsAreValid)
         );
-};
+});
 
 function checkNewUsername() {
     let username = document.getElementById("newUsername").value;
@@ -16,7 +27,7 @@ function checkNewUsername() {
     usernameAlreadyExists.innerHTML = "-";
     if(username === '') return;
 
-    let jsonObject = new Object;
+    let jsonObject = {};
     jsonObject.username = username;
     
     fetch('/userExists', {
@@ -35,8 +46,7 @@ function checkNewUsername() {
                 usernameAlreadyExists.innerHTML = "Available";
                 validNewUsername = true;
             }
-
-            return userExists;
+            enableRegisterButtonIfAllInputsAreValid();
         });
 }
 
@@ -75,11 +85,7 @@ function checkNewUserPasswordStrength() {
             break;
     }
 
-    if (strength == 4){
-        strongPassword = true;
-    }else {
-        strongPassword = false;
-    }
+    strongPassword = strength === 4;
 }
 
 function compareNewUserPasswords() {
@@ -97,20 +103,17 @@ function compareNewUserPasswords() {
 }
 
 function registerButtonClick() {
+    checkNewUsername();
     if (isRegisterInputValid) {
         let username = document.getElementById("newUsername");
         let password = document.getElementById("password");
-        let jsonObject = new Object();
+        let jsonObject = {};
 
         jsonObject.username = username.value;
         jsonObject.password = password.value;
 
         registerUser(jsonObject); 
     }
-}
-
-function isRegisterInputValid() {
-    return (newUserPasswordsCorrect && strongPassword && validNewUsername);
 }
 
 function registerUser(user) {
@@ -135,11 +138,11 @@ function registerUser(user) {
 function enableRegisterButtonIfAllInputsAreValid() {
     let registerButton = document.getElementById("registerButton");
 
-    if(isRegisterInputValid()) {
-        registerButton.disabled = false;
-    } else {
-        registerButton.disabled = true;
-    }
+    registerButton.disabled = !isRegisterInputValid();
+}
+
+function isRegisterInputValid() {
+    return (newUserPasswordsCorrect && strongPassword && validNewUsername);
 }
 
 function log(s) {

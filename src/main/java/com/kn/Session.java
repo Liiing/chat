@@ -7,12 +7,16 @@ import java.util.UUID;
 public class Session {
     private WebSocket webSocket;
     private String username;
-    private UUID token;
+    private String token;
 
-    public Session(WebSocket webSocket, String username, UUID token) {
+    public Session(WebSocket webSocket, String username, String token) {
         this.webSocket = webSocket;
         this.username = username;
         this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     public void setWebSocket(WebSocket webSocket) {

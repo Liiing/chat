@@ -8,7 +8,7 @@
     <div id="loginMask">
         <input type="text" class="loginElement" id="username" name="username" placeholder="Username">
         <input type="password" class="loginElement" id="password" name="password" placeholder="Password">
-        <button id="loginButton" class="loginElement" onclick="loginButtonClick()">Login</button>
+        <button id="loginButton" class="loginElement">Login</button>
         <a class="loginElement" href="register/index.html"><button id="gotToRegisterButton">Sign Up</button></a>
         <p id="incorrectLoginDataMessage"></p>
     </div>
@@ -17,11 +17,11 @@
         <p>Chat</p>
         <textarea id="chatBox" class="chatElement"></textarea>
         <input type="text" id="textBox" class="chatElement" name="textBox" placeholder="...">
-        <button id="messageButton" class="chatElement" onclick="messageButtonClick()">Send</button>
-        <button id="logout" class="chatElement" onclick="">Log Out</button>
+        <button id="messageButton" class="chatElement">Send</button>
+        <button id="logoutButton" class="chatElement">Log Out</button>
     </div>
 
-    <div id="infoBox" hidden>
+    <div id="infoBox" >
     </div>
 
     <script src="chat.js"></script>

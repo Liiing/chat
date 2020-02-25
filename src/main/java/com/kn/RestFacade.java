@@ -3,7 +3,9 @@ package com.kn;
 import com.kn.util.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,10 +19,10 @@ public class RestFacade {
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     public boolean register(@RequestBody User user, HttpServletResponse response) {
         boolean registerSuccessful = false;
-         if (restController.register(user)) {
-             registerSuccessful = true;
-         }
-         return registerSuccessful;
+        if (restController.register(user)) {
+            registerSuccessful = true;
+        }
+        return registerSuccessful;
     }
 
     @ResponseBody
@@ -39,4 +41,10 @@ public class RestFacade {
     public java.lang.String login(@RequestBody User user) {
         return Gson.toJson(restController.login(user));
     }
+
+//    @ResponseBody
+//    @PostMapping(path = "/logout", consumes = "application/json", produces = "application/json")
+//    public boolean logout(@RequestBody Message message) {
+//        return false;
+//    }
 }

@@ -6,7 +6,7 @@
 <body>
 	<div id="registerMask">
         <p id="usernameAlreadyExists">-</p>
-        <input type="text" id="newUsername" name="newUsername" placeholder="Username" autofocus onkeyup="startTimoutWaitingForInactivity(checkNewUsername)">
+        <input type="text" id="newUsername" name="newUsername" placeholder="Username" autofocus>
         <h3 id="passwordInformation">Password must contain:</h3>
         <ul id="passwordRequirements" title="Password must contain:">
             <li id="passwordLowercase"> A lowercase letter</li>
@@ -15,11 +15,11 @@
             <li id="passwordSymbol"> A symbol</li>
             <li id="passwordLength"> Minimum 8 characters</li>
         </ul>
-        <input type="password" id="password" name="password" placeholder="Password" onkeyup="checkNewUserPasswordStrength(); compareNewUserPasswords()">
+        <input type="password" id="password" name="password" placeholder="Password">
         <p id="passwordsStrength"></p>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" onkeyup="compareNewUserPasswords()">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password">
         <p id="passwordsNotSame"></p>
-        <button disabled id="registerButton" onclick="registerButtonClick()">Register</button>
+        <button disabled id="registerButton">Register</button>
     </div>
     <script src="register.js"></script>
     <script src="../global.js"></script>

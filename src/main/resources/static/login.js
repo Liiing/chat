@@ -1,8 +1,8 @@
 let username;
+let loginButton = document.getElementById('loginButton');
+loginButton.addEventListener('click', loginUser);
+userInfoStorage = localStorage;
 
-function loginButtonClick() {
-    loginUser();
-}
 
 function loginUser() {
 	username = document.getElementById("username").value;
@@ -26,8 +26,11 @@ function loginUser() {
         	let message = {};
         	message.command = "login";
         	message.token = session.token;
+            message.username = username;
 
-        	username = session.username;
+            userInfoStorage.setItem("username", username);
+            userInfoStorage.setItem("token", session.token);
+
             send(message);
 
         } else {

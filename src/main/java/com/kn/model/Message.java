@@ -1,24 +1,23 @@
 package com.kn.model;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public class Message {
-    private String sender;
+    private String username;
     private Instant serverReceivedTime;
 
-    public UUID getToken() {
+    public String getToken() {
         return token;
     }
 
-    private UUID token;
+    private String token;
     private String content;
     private String command;
 
-    public Message(String sender, Instant serverReceivedTime, String token, String content) {
-        this.sender = sender;
+    public Message(String username, Instant serverReceivedTime, String token, String content) {
+        this.username = username;
         this.serverReceivedTime = serverReceivedTime;
-        this.token = UUID.fromString(token);
+        this.token = token;
         this.content = content;
     }
 
@@ -34,8 +33,8 @@ public class Message {
         return command;
     }
 
-    public String getSender() {
-        return sender;
+    public String getUsername() {
+        return username;
     }
 
     public Instant getServerReceivedTime() {

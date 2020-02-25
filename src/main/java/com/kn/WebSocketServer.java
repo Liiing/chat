@@ -14,12 +14,15 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     private  static WebSocketServer instance;
     private static int TCP_PORT = 4444;
     private List<WebSocket> visitorConnections;
-    private Map<UUID, Session> sessionMap;
+    private Map<String, Session> sessionMap;
+    private List<String> onlineUsersByName;
+    private List<Message> messageHistory;
 
     private WebSocketServer() {
         super(new InetSocketAddress(TCP_PORT));
         visitorConnections = new ArrayList<>();
-
+        onlineUsersByName = new ArrayList<>();
+        messageHistory = new ArrayList<>();
         sessionMap = new HashMap<>();
     }
 
@@ -31,7 +34,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
 
-    public void addSession(UUID token, Session session) {
+    public void addSession(String token, Session session) {
         sessionMap.put(token, session);
     }
 
@@ -57,6 +60,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
         {
             case "login":
                 addWebSocketToSession(message, conn);
+                sendMessageHistory(conn);
                 message.setContent("Login successful");
                 message.setCommand("Login successful");
                 conn.send(Gson.toJson(message));
@@ -64,21 +68,40 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
             case "messageToRoom":
                 addMessageToRoom(message);
                 break;
+            case "logout":
+                logoutUser(message, conn);
+                break;
             default:
                 System.out.println("Missing command");
         }
     }
 
     private void addMessageToRoom(Message message) {
+        message.setCommand("messageToChatRoom");
         for (WebSocket userConnection : visitorConnections) {
             userConnection.send(Gson.toJson(message));
+        }
+        messageHistory.add(message);
+    }
+
+    private void sendMessageHistory(WebSocket conn) {
+        for (Message mess : messageHistory) {
+            conn.send(Gson.toJson(mess));
         }
     }
 
     private void addWebSocketToSession(Message message, WebSocket conn) {
-        UUID token = message.getToken();
+        String token = message.getToken();
         Session session = sessionMap.get(token);
         session.setWebSocket(conn);
+        onlineUsersByName.add(message.getUsername());
+    }
+
+    private void logoutUser(Message message, WebSocket conn) {
+        String token = message.getToken();
+        sessionMap.remove(token);
+        message.setCommand("Logged out");
+        conn.send(Gson.toJson(message));
     }
 
     @Override
