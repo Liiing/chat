@@ -66,6 +66,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
                 conn.send(Gson.toJson(message));
                 break;
             case "messageToRoom":
+                saveMessage(message);
                 addMessageToRoom(message);
                 break;
             case "logout":
@@ -81,13 +82,14 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
         for (WebSocket userConnection : visitorConnections) {
             userConnection.send(Gson.toJson(message));
         }
+    }
+
+    private void saveMessage(Message message) {
+        message.setId();
         messageHistory.add(message);
     }
 
     private void sendMessageHistory(WebSocket conn) {
-        messageHistory.add(new Message("a", Instant.now(), "gfdgs", "TestTestTest"));
-        messageHistory.add(new Message("a", Instant.now(), "gfdgs", "TestTestTest"));
-
         for (Message mess : messageHistory) {
             conn.send(Gson.toJson(mess));
         }

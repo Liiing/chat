@@ -22,10 +22,10 @@ function messageButtonClick() {
     send(message);
 }
 
-function sendToChatBox(username, content) {
+function sendToChatBox(username, content, id) {
     let chatBox = document.getElementById("chatBox");
 
-    chatBox.innerHTML = chatBox.innerHTML + username +  ": " + content + "\n";
+    chatBox.innerHTML = chatBox.innerHTML + "message id: " + id + " " + username +  ": " + content + "\n";
 }
 
 function logout() {

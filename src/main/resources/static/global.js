@@ -20,7 +20,8 @@ connection.onmessage = function (response) {
             showInfoBox("Login successful");
             break;
         case "messageToChatRoom":
-            sendToChatBox(message.username, message.content);
+            userInfoStorage.setItem("messageId", message.id);
+            sendToChatBox(message.username, message.content, message.id);
             break;
         case "Logged out":
             window.location.href = "logged-out.html";

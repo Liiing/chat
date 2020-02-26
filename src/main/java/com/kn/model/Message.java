@@ -5,20 +5,31 @@ import java.time.Instant;
 public class Message {
     private String username;
     private Instant serverReceivedTime;
+    private String token;
+    private String content;
+    private String command;
+    private int id;
+    private static int freeId = 0;
+
+    public Message(String username, Instant serverReceivedTime, String token, String content, String command) {
+        this.username = username;
+        this.serverReceivedTime = serverReceivedTime;
+        this.token = token;
+        this.content = content;
+        this.command = command;
+    }
 
     public String getToken() {
         return token;
     }
 
-    private String token;
-    private String content;
-    private String command;
+    public void setId() {
+        this.id = freeId;
+        freeId++;
+    }
 
-    public Message(String username, Instant serverReceivedTime, String token, String content) {
-        this.username = username;
-        this.serverReceivedTime = serverReceivedTime;
-        this.token = token;
-        this.content = content;
+    private int getId() {
+        return this.id;
     }
 
     public void setContent(String content) {

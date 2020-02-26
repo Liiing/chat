@@ -8,14 +8,18 @@
     <div id="loginMask">
         <input type="text" class="loginElement" id="username" name="username" placeholder="Username">
         <input type="password" class="loginElement" id="password" name="password" placeholder="Password">
-        <button id="loginButton" class="loginElement">Login</button>
-        <a class="loginElement" href="register/index.html"><button id="gotToRegisterButton">Sign Up</button></a>
+        <button id="loginButton" class="loginMaskButtons loginBorder loginElement">Login</button>
+        <a href="register/index.html"><button id="gotToRegisterButton" class="loginMaskButtons loginElement">Sign Up</button></a>
         <p id="incorrectLoginDataMessage"></p>
     </div>
 
     <div id="chat" hidden>
         <p>Chat</p>
-        <textarea id="chatBox" class="chatElement"></textarea>
+        <div id="chatBox">
+
+        </div>
+
+<!--        <textarea id="chatBox" class="chatElement"></textarea>-->
         <input type="text" id="textBox" class="chatElement" name="textBox" placeholder="...">
         <button id="messageButton" class="chatElement">Send</button>
         <button id="logoutButton" class="chatElement">Log Out</button>
