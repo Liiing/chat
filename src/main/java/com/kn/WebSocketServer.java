@@ -85,6 +85,9 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     private void sendMessageHistory(WebSocket conn) {
+        messageHistory.add(new Message("a", Instant.now(), "gfdgs", "TestTestTest"));
+        messageHistory.add(new Message("a", Instant.now(), "gfdgs", "TestTestTest"));
+
         for (Message mess : messageHistory) {
             conn.send(Gson.toJson(mess));
         }

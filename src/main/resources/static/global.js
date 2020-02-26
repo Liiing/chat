@@ -11,6 +11,7 @@ connection.onmessage = function (response) {
     let message = JSON.parse(response.data);
     let command = message.command;
 
+
     switch (command) {
         case "Login successful":
             let infoBox = document.getElementById("infoBox");

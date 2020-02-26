@@ -9,7 +9,6 @@ public class AfterStartUp {
 
     @EventListener(ApplicationReadyEvent.class)
     public void startWebSocket(){
-
         DatabaseService.registeredUsers.add(new User("a", "a"));
 
         WebSocketServer webSocketServer = WebSocketServer.getInstance();
