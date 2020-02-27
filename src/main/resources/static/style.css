@@ -1,11 +1,12 @@
 body {
-    background-color: white;
+    font-family: "Calibri Light", sans-serif;
+    background-color: #303030;
 }
 
 #loginMask {
-    background-color: #555555;
+    background-color: #4c4c4c;
     width: 300px;
-    height: 150px;
+    height: 400px;
     border-radius: 5px;
     margin: 40% auto auto;
     box-shadow:
@@ -19,12 +20,22 @@ body {
     border: none;
 }
 
+#loginContainer {
+    padding: 10% 10% 10% 10%;
+}
+
 .loginMaskButtons {
     background-color: white;
-    border-radius: 2px;
     font-size: 16px;
-    color: #373941;
+    color: #4c4c4c;;
     border: none;
+}
+
+.loginMaskButtons:hover {
+    background-color: #4c4c4c;
+    color: white;
+    border-color: white;
+    border-width: 10px;
 }
 
 .loginBorder {
@@ -39,20 +50,9 @@ body {
     opacity: 1;
     transition: 1s opacity;
     text-align: center;
-    font-size:16px;
+    font-size: 16px;
 }
 
-#username {
-    display: block;
-}
-
-#password {
-    display: block;
-}
-
-#loginButton {
-    alignment: right;
-}
 
 #registerButton {
     alignment: right;
@@ -64,9 +64,25 @@ body {
 }
 
 #chatBox {
+    background-color: #303030;;
     display: block;
     width: 400px;
     height: 200px;
+}
+
+.loginTextBoxes {
+    background-color: #4c4c4c;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: lightgray;
+    border-width: thin;
+}
+
+::placeholder {
+    color: lightgray;
+    font-size: 16px;
 }
 
 #textBox {
@@ -76,4 +92,5 @@ body {
 .chatElement {
     margin: 5px;
 }
+
 

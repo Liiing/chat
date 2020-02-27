@@ -24,8 +24,15 @@ function messageButtonClick() {
 
 function sendToChatBox(username, content, id) {
     let chatBox = document.getElementById("chatBox");
+    let messageDiv = document.createElement('div');
+    let messageSpan = document.createElement('span');
+    let messageText = document.createTextNode("message id: " + id + " | " + username + ": " + content);
+    messageSpan.setAttribute('id', 'messageSpan');
+    messageDiv.setAttribute('id', 'messageDiv');
 
-    chatBox.innerHTML = chatBox.innerHTML + "message id: " + id + " " + username +  ": " + content + "\n";
+    messageSpan.appendChild(messageText);
+    messageDiv.appendChild(messageSpan);
+    chatBox.appendChild(messageDiv);
 }
 
 function logout() {

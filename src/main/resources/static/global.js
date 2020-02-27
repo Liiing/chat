@@ -1,7 +1,7 @@
 let connection = new WebSocket('ws://localhost:4444');
 let inactivityTimer;
 let logoutButton = document.getElementById('logoutButton');
-logoutButton.addEventListener('click', logout);
+
 
 connection.onopen = function () {
     log('Websocket open!');
@@ -91,3 +91,7 @@ function logout() {
 function log(s) {
     console.log(s);
 }
+
+window.addEventListener('load', () => {
+    logoutButton.addEventListener('click', logout);
+});
