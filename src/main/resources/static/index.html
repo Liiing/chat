@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
+    <title>Homepage</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" type="text/css" href="chat.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div id="loginMask">
+<div id="loginMask" class="hidden">
     <input type="text" id="username" class="loginElement loginTextBoxes" name="username" placeholder="Username">
     <input type="password" id="password" class="loginElement loginTextBoxes" name="password" placeholder="Password">
 
     <div class="loginButtonDiv">
         <button id="loginButton" class="loginMaskButtons loginElement">Login</button>
-        <a href="register/index.html">
-            <button id="gotToRegisterButton" class="loginMaskButtons loginElement">Sign Up</button>
-        </a>
     </div>
+    <div class="signUpDiv">
+        <button id="signUpButton" class="loginMaskButtons loginElement">Sign Up</button>
+    </div>
+
     <p id="incorrectLoginDataMessage"></p>
 </div>
 
-<div id="chat" hidden>
+<div id="chatMask" class="hidden" hidden>
     <p>Chat</p>
 
     <div id="onlineUserList">
@@ -33,8 +34,9 @@
 
     <input type="text" id="textBox" class="chatElement" name="textBox" placeholder="...">
     <button id="messageButton" class="chatElement">Send</button>
-    <button id="logoutButton" class="chatElement">Log Out</button>
 </div>
+
+    <button id="logoutButton" class="chatElement">Log Out</button>
 
 <div id="infoBox">
 </div>

@@ -1,7 +1,11 @@
 let connection = new WebSocket('ws://localhost:4444');
 let inactivityTimer;
 let logoutButton = document.getElementById('logoutButton');
+let signUp = document.getElementById('signUpButton');
 
+signUp.addEventListener("click", function(){
+    document.location.href = 'register/index.html';
+});
 
 connection.onopen = function () {
     log('Websocket open!');
@@ -15,8 +19,8 @@ connection.onmessage = function (response) {
     switch (command) {
         case "Login successful":
             let infoBox = document.getElementById("infoBox");
-            hideChat(false);
             hideLogin(true);
+            hideChat(false);
             showInfoBox("Login successful");
             break;
         case "messageToChatRoom":
@@ -51,9 +55,9 @@ function fadeout(element) {
 }
 
 function hideChat(boolean) {
-    let chat = document.getElementById("chat");
+    let chatMask = document.getElementById("chatMask");
 
-    chat.hidden=boolean;
+    chatMask.hidden=boolean;
 }
 
 function hideLogin(boolean) {
@@ -93,5 +97,7 @@ function log(s) {
 }
 
 window.addEventListener('load', () => {
+    let chatMask = document.getElementById('chatMask');
+
     logoutButton.addEventListener('click', logout);
 });
