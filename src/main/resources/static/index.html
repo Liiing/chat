@@ -3,29 +3,21 @@
 <head>
     <title>Chat</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="chat.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div id="loginMask">
-    <div id="loginContainer">
+    <input type="text" id="username" class="loginElement loginTextBoxes" name="username" placeholder="Username">
+    <input type="password" id="password" class="loginElement loginTextBoxes" name="password" placeholder="Password">
 
-        <div class="loginTextBoxDivs">
-            <input type="text" id="username" class="loginElement loginTextBoxes" name="username" placeholder="Username">
-        </div>
-        <div class="loginTextBoxDivs">
-            <input type="password" id="password" class="loginElement loginTextBoxes" name="password"
-                   placeholder="Password">
-        </div>
-
-
-        <div class="loginButtonDiv">
-            <button id="loginButton" class="loginMaskButtons loginBorder loginElement">Login</button>
-        </div>
+    <div class="loginButtonDiv">
+        <button id="loginButton" class="loginMaskButtons loginElement">Login</button>
         <a href="register/index.html">
             <button id="gotToRegisterButton" class="loginMaskButtons loginElement">Sign Up</button>
         </a>
-        <p id="incorrectLoginDataMessage"></p>
     </div>
+    <p id="incorrectLoginDataMessage"></p>
 </div>
 
 <div id="chat" hidden>

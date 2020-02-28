@@ -1,0 +1,26 @@
+#chatBox {
+    display: block;
+
+}
+
+#chatBox {
+    background-color: #303030;;
+    display: block;
+    width: 400px;
+    height: 200px;
+}
+
+#textBox {
+    width: 350px;
+}
+
+.chatElement {
+    margin: 5px;
+}
+
+#messageDiv {
+    color: white;
+    border-width: thin;
+    border-color: white;
+    border-radius: 2px;
+}
