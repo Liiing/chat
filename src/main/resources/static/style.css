@@ -29,6 +29,7 @@ body {
 
 .hidden {
     display: none;
+    background-color: crimson;
 }
 
 .show {

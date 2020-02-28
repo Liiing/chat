@@ -19,7 +19,10 @@ connection.onmessage = function (response) {
     switch (command) {
         case "Login successful":
             let infoBox = document.getElementById("infoBox");
-            hideLogin(true);
+            let loginMask = document.getElementById("loginMask");
+
+            loginMask.classList.add("hidden");
+            // hideLogin(true);
             hideChat(false);
             showInfoBox("Login successful");
             break;
@@ -98,6 +101,6 @@ function log(s) {
 
 window.addEventListener('load', () => {
     let chatMask = document.getElementById('chatMask');
-
+    chatMask.classList.add("hidden");
     logoutButton.addEventListener('click', logout);
 });
