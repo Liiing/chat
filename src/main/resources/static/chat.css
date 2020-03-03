@@ -1,17 +1,20 @@
-#chatMask {
+.chatMask {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     flex-direction: column;
 
+    height: 100%;
     width: 15rem;
     padding: 3rem 2rem 2rem;
 
-    background-color: #4c4c4c;
+    background-color: darkred;
+    /*#4c4c4c;*/
     border-radius: 5px;
     border: none;
-}
-
-#chatBox {
-    display: block;
 }
 
 #chatBox {
@@ -22,7 +25,7 @@
 }
 
 #textBox {
-    width: 350px;
+
 }
 
 .chatElement {

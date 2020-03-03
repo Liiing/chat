@@ -1,7 +1,10 @@
 package com.kn;
 
+import com.kn.model.Session;
+import com.kn.model.User;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -38,5 +41,10 @@ public class RestController {
             }
         }
         return null;
+    }
+
+    public List<String> getOnlineUsers() {
+        return WebSocketServer.getInstance().getOnlineUsersByName();
+
     }
 }

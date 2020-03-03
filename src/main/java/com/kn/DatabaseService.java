@@ -1,5 +1,7 @@
 package com.kn;
 
+import com.kn.model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 

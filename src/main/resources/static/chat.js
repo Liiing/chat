@@ -27,6 +27,7 @@ function sendToChatBox(username, content, id) {
     let messageDiv = document.createElement('div');
     let messageSpan = document.createElement('span');
     let messageText = document.createTextNode("message id: " + id + " | " + username + ": " + content);
+
     messageSpan.setAttribute('id', 'messageSpan');
     messageDiv.setAttribute('id', 'messageDiv');
 

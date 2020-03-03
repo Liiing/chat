@@ -1,4 +1,4 @@
-package com.kn;
+package com.kn.model;
 
 import org.java_websocket.WebSocket;
 

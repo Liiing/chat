@@ -1,5 +1,6 @@
 package com.kn;
 import com.kn.model.Message;
+import com.kn.model.Session;
 import com.kn.util.Gson;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -61,6 +62,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
             case "login":
                 addWebSocketToSession(message, conn);
                 sendMessageHistory(conn);
+                onlineUsersByName.add(message.getUsername());
                 message.setContent("Login successful");
                 message.setCommand("Login successful");
                 conn.send(Gson.toJson(message));
@@ -75,6 +77,10 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
             default:
                 System.out.println("Missing command");
         }
+    }
+
+    public List<String> getOnlineUsersByName() {
+        return onlineUsersByName;
     }
 
     private void addMessageToRoom(Message message) {

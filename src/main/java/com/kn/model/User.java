@@ -1,4 +1,4 @@
-package com.kn;
+package com.kn.model;
 
 
 public class User {

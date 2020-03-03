@@ -19,11 +19,14 @@ connection.onmessage = function (response) {
     switch (command) {
         case "Login successful":
             let infoBox = document.getElementById("infoBox");
-            let loginMask = document.getElementById("loginMask");
+            let loginMask = document.getElementsByClassName("loginMask")[0];
+            let chatMask = document.getElementsByClassName("chatMask")[0];
 
-            loginMask.classList.add("hidden");
-            // hideLogin(true);
-            hideChat(false);
+            showOnlineUserList();
+
+            loginMask.classList.toggle("hidden");
+            chatMask.classList.toggle("hidden");
+
             showInfoBox("Login successful");
             break;
         case "messageToChatRoom":
@@ -46,6 +49,30 @@ function send(object) {
     connection.send(JSON.stringify(object));
 }
 
+function showOnlineUserList() {
+    fetch('/getOnlineUsers', {
+    }).then((response) => {
+        return response.json();
+    }).then((onlineUsers) => {
+        // let onlineUser = JSON.parse(onlineUsers);
+
+        let onlineUserList = document.getElementsByClassName("onlineUserList")[0];
+
+        for (let i in onlineUsers) {
+            let onlineUsername = onlineUsers[i];
+            let onlineUserSpan = document.createElement('span');
+            let onlineUserDiv = document.createElement('div');
+
+            onlineUserDiv.setAttribute("class", "onlineUserDiv");
+            onlineUserSpan.setAttribute("class", "onlineUserSpan");
+
+            onlineUserSpan.appendChild(document.createTextNode(onlineUsername));
+            onlineUserDiv.appendChild(onlineUserSpan);
+            onlineUserList.appendChild(onlineUserDiv);
+        }
+    })
+}
+
 function showInfoBox(info) {
     let infoBox = document.getElementById("infoBox");
     window.setTimeout(function () {fadeout(infoBox)}, 5000);
@@ -55,18 +82,6 @@ function showInfoBox(info) {
 
 function fadeout(element) {
     element.style.opacity = "0";
-}
-
-function hideChat(boolean) {
-    let chatMask = document.getElementById("chatMask");
-
-    chatMask.hidden=boolean;
-}
-
-function hideLogin(boolean) {
-    let loginMask = document.getElementById("loginMask");
-
-    loginMask.hidden=boolean;
 }
 
 function startTimoutWaitingForInactivity(fun) {
@@ -100,7 +115,7 @@ function log(s) {
 }
 
 window.addEventListener('load', () => {
-    let chatMask = document.getElementById('chatMask');
-    chatMask.classList.add("hidden");
+    let chatMask = document.getElementsByClassName("chatMask")[0];
+    chatMask.classList.toggle("hidden");
     logoutButton.addEventListener('click', logout);
 });
